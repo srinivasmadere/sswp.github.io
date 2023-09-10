@@ -2,94 +2,62 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Your Name - Resume</title>
+    <title>Input Logger</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f2f2f2;
         }
 
-        .container {
-            max-width: 800px;
+        #inputForm {
+            max-width: 400px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        h1 {
-            font-size: 24px;
-        }
-
-        h2 {
-            font-size: 20px;
-        }
-
-        p {
-            font-size: 16px;
-            line-height: 1.5;
-        }
-
-        /* Customize your styling here */
-
-        /* Example styling for sections */
-        .section {
-            margin-bottom: 20px;
-        }
-
-        /* Example styling for headings */
-        .section h2 {
-            color: #333;
-        }
-
-        /* Example styling for lists */
-        ul {
-            list-style-type: disc;
-            margin-left: 20px;
-        }
-
-        /* Style for the photo */
-        .profile-photo {
-            max-width: 150px;
-            border: 3px solid #333;
+        #log {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <header>
-        <img class="profile-photo" src="your-photo.jpg" alt="Your Photo">
-        <h1>Your Name</h1>
-        <p>Web Developer</p>
-        <p>Email: your@email.com</p>
-        <p>Phone: (123) 456-7890</p>
-    </header>
-
-    <section class="section">
-        <h2>Summary</h2>
-        <p>Summarize your skills and experience here.</p>
-    </section>
-
-    <section class="section">
-        <h2>Education</h2>
-        <p>Your degree, institution, and graduation year.</p>
-    </section>
-
-    <section class="section">
-        <h2>Experience</h2>
-        <p>Your job title, company, and dates of employment.</p>
-    </section>
-
-    <section class="section">
-        <h2>Skills</h2>
-        <ul>
-            <li>Skill 1</li>
-            <li>Skill 2</li>
-            <li>Skill 3</li>
-        </ul>
-    </section>
+<div id="inputForm">
+    <h2>Input Logger</h2>
+    <form id="userInputForm">
+        <label for="userInput">Enter something:</label>
+        <input type="text" id="userInput" required>
+        <button type="submit">Submit</button>
+    </form>
 </div>
+
+<div id="log">
+    <h3>Log:</h3>
+    <ul id="logList">
+    </ul>
+</div>
+
+<script>
+    // Get references to HTML elements
+    const userInputForm = document.getElementById('userInputForm');
+    const userInput = document.getElementById('userInput');
+    const logList = document.getElementById('logList');
+
+    // Add an event listener to the form
+    userInputForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the form from submitting traditionally
+
+        // Get the user's input and the current timestamp
+        const inputText = userInput.value;
+        const timestamp = new Date().toLocaleString();
+
+        // Create a new list item to display the input and timestamp
+        const listItem = document.createElement('li');
+        listItem.textContent = `${inputText} (Submitted at ${timestamp})`;
+
+        // Append the list item to the log
+        logList.appendChild(listItem);
+
+        // Clear the input field
+        userInput.value = '';
+    });
+</script>
 </body>
 </html>
